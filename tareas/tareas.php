@@ -1,5 +1,5 @@
 <?php
-$clave = $_GET['clave'];
+$clave = $_POST['clave3'];
 //echo $clave;
 
 $url = "http://localhost/php/rest/tareas/";
@@ -44,6 +44,7 @@ $data = json_decode($respuesta,true);
 
 echo " <h1>Todas las Tareas</h1>";
 
+if($data['estado']=="OK"){
 echo "<table border='1px' >";
 echo "<tr>";
 echo "  <th> IdTarea </th>";
@@ -67,7 +68,19 @@ for ($i = 0; $i < count($data['mensaje']); $i++) {
 echo "</tr>";
 echo "</table>";
 
+}else{
+    echo "<table border='1px' >";
+    echo "<tr>";
+    echo "  <th> IdTarea </th>";
+    echo "  <th> Titulo  </th>";
+    echo "  <th> Descripcion </th>";
+    echo "  <th> Fecha de Entrega  </th>";
+    echo "  <th> Unidad </th>";
+    echo "  <th> IdAlumno </th>";
+    echo "</tr>";
+echo "</table>";
 
+}
 
 
 ?>
