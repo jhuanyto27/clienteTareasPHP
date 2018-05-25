@@ -1,5 +1,5 @@
 <?php
-$clave = $_GET['clave'];
+$clave = $_POST['clave1'];
 //echo $clave;
 
 $url = "http://localhost/php/rest/materias/";
@@ -42,7 +42,7 @@ $data = json_decode($respuesta,true);
 //print_r ($data['mensaje'][0]['idMateria']);
 //print_r ($data['estado']);
 //echo count($data['mensaje']);
-
+if($data['estado']=="OK"){
 echo " <h1>Todas las materias</h1>";
 
 echo "<table border='1px' >";
@@ -60,7 +60,17 @@ for ($i = 0; $i < count($data['mensaje']); $i++) {
 echo "</tr>";
 echo "</table>";
 
+}else{
+    echo " <h1>Todas las materias</h1>";
 
+echo "<table border='1px' >";
+echo "<tr>";
+echo "  <th> IdMateria </th>";
+echo "  <th> Nombre  </th>";
+echo "  <th> IdAlumno </th>";
+echo "</tr>";
+echo "</table>";
+}
 
 
 ?>
@@ -102,8 +112,8 @@ Nombre:<input type="text_area"  size= "35"  name="nombre" > <br>
 
 <h3>Eliminar</h3>
 <form action="m_eliminar.php" method="post">
- Autorization:<input type="number"  size= "35" read_only="read_only" name="clave" value="<?php echo $clave; ?>" readonly> <br>
- ID a Eliminar: <input type="text" size="5" name="id" required>
+ Autorization:<input type="text_area"  size= "35" read_only="read_only" name="clave" value="<?php echo $clave; ?>" readonly> <br>
+ ID a Eliminar: <input type="number" size="5" name="id" required>
  <input type="submit" value="Eliminar">
     </form>    
     
