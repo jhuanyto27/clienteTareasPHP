@@ -1,5 +1,5 @@
 <?php
-$clave = $_GET['clave'];
+$clave = $_POST['clave2'];
 //echo $clave;
 
 $url = "http://localhost/php/rest/profesores/";
@@ -42,7 +42,8 @@ $data = json_decode($respuesta,true);
 //print_r ($data['mensaje']);
 //echo count($data['mensaje']);
 
-echo " <h1>Todas los profesores</h1>";
+if($data['estado']=="OK"){
+echo " <h1>Todos los profesores</h1>";
 
 echo "<table border='1px' >";
 echo "<tr>";
@@ -65,7 +66,19 @@ for ($i = 0; $i < count($data['mensaje']); $i++) {
 echo "</tr>";
 echo "</table>";
 
+}else{
+    echo " <h1>Todos los profesores</h1>";
 
+    echo "<table border='1px' >";
+    echo "<tr>";
+    echo "  <th> IdProfesor </th>";
+    echo "  <th> Nombre  </th>";
+    echo "  <th> Apellido </th>";
+    echo "  <th> Correo  </th>";
+    echo "  <th> IdAlumno </th>";  
+    echo "</tr>";
+echo "</table>";
+}
 
 
 ?>
