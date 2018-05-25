@@ -30,13 +30,7 @@ curl_setopt($conexion, CURLOPT_POST, 1);
  
 // --- HTTPGET a false porque no se trata de una petición GET.
  
-curl_setopt($conexion, CURLOPT_HTTPGET, FALSE);
- 
-// -- HEADER a false.
- 
-curl_setopt($conexion, CURLOPT_HEADER, FALSE);
- 
-$respuesta=curl_exec($conexion);
+
 
 // --- Respuesta.
  
@@ -45,36 +39,62 @@ $respuesta=curl_exec($conexion);
 $data = json_decode($respuesta,true);
 //print_r($data);
 
-
-
+if($data['estado']=="1"){
+    echo"<h2>Datos de ingreso </h2>";
+    echo"Nombre:";
+    echo "<input type=\"text\" name=\"estado\" value=\"".$data['alumno']['nombre']."\">";
+    echo "<br>";
+    echo"Apellido:";
+    echo "<input type=\"text\" size=\"25\" name=\"mensaje\" value=\"".$data['alumno']['apellido']."\">";
+    echo "<br>";
+    echo"Carrera:";
+    echo "<input type=\"text\" name=\"estado\" value=\"".$data['alumno']['carrera']."\">";
+    echo "<br>";
+    echo"Password:";
+    echo "<input type=\"text\" size=\"70\" name=\"mensaje\" value=\"".$data['alumno']['password']."\">";
+    echo "<br>";
+    echo"Clave Api:";
+    echo "<input type=\"text\"  size=\"35\" name=\"estado\" value=\"".$data['alumno']['claveApi']."\">";
+    echo "<br>";
+    echo "<br>";
+    echo"<h3>Recursos</h3>";
+    echo "<br>";
+    echo "<br>";
+    echo"<form action ='materias/materias.php' method='post'>";
+    echo"Authorization:";
+    echo "<input type=\"text\" size=\"35\" name=\"clave1\" value=\"".$data['alumno']['claveApi']."\">";
+    echo "<input type=\"submit\" value=\"Materias\">";
+    echo "</form>";
+    echo "<br>";
+    echo "<br>";
+    echo"<form action ='profesores/profesores.php' method='post'>";
+    echo"Authorization:";
+    echo "<input type=\"text\" size=\"35\" name=\"clave2\" value=\"".$data['alumno']['claveApi']."\">";
+    echo "<input type=\"submit\" value=\"Profesores\">";
+    echo "</form>";
+    echo "<br>";
+    echo "<br>";
+    echo"<form action ='tareas/tareas.php' method='post'>";
+    echo"Authorization:";
+    echo "<input type=\"text\" size=\"35\" name=\"clave3\" value=\"".$data['alumno']['claveApi']."\">";
+    echo "<input type=\"submit\" value=\"Tareas\">";
+    echo "</form>";
+}else{
+    
+    echo"Estado:";
+    echo "<input type=\"text\" name=\"estado\" value=\"".$data['estado']."\">";
+    echo "<br>";
+    echo"Mensaje:";
+    echo "<input type=\"text\" size=\"30\" name=\"mensaje\" value=\"".$data['mensaje']."\">";
+}
 
 curl_close($conexion);
 
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cliente</title>
-</head>
-<body>
-<h1>Los datos del ingreso son:</h1>
-Nombre:<input type="text_area"  size= "15" read_only="read_only" name="nombre" value="<?php echo $data['alumno']['nombre'] ?>" readonly><br>
-Apellido:<input type="text_area"  size= "15" read_only="read_only" name="apellido" value="<?php echo $data['alumno']['apellido'] ?>" readonly><br>
-Carrera:<input type="text_area"  size= "15" read_only="read_only" name="carrera" value="<?php echo $data['alumno']['carrera'] ?>" readonly><br>
-Password:<input type="text_area"  size= "70" read_only="read_only" size= "70" name="passwprd" value="<?php echo $data['alumno']['password'] ?>" readonly><br>
-Clave Api:<input type="text_area"  size= "35" read_only="read_only" size= "35" name="clave" value="<?php echo $data['alumno']['claveApi'] ?>" readonly><br>
 
 
-<h3>Recursos</h3>
 
-<input type="button" value="Materias" onclick="location.href = 'materias/materias.php?clave=<?php echo $data['alumno']['claveApi'] ?>'"><br>
-        <input type="button" value="Profesores" onclick="location.href = 'profesores/profesores.php?clave=<?php echo $data['alumno']['claveApi'] ?>'"><br>
-        <input type="button" value="Tareas" onclick="location.href = 'tareas/tareas.php?clave=<?php echo $data['alumno']['claveApi'] ?>'"><br>
 
-    </body>
-</html>
+       
